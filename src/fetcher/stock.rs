@@ -70,7 +70,6 @@ impl StockFetcher {
     }
 
     // 参考 https://github.com/LeekHub/leek-fund/blob/master/src/explorer/stockService.ts#L382
-    // Box<dyn std::error::Error>
     pub async fn get_data(
         &mut self,
         stock_code: &str,
@@ -92,7 +91,7 @@ impl StockFetcher {
             // .text()
             .await?;
 
-        println!("{json_data:#?}");
+        // println!("{json_data:#?}");
 
         if json_data.error_code != 0 {
             Err(Box::new(io::Error::new(
