@@ -1,4 +1,5 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use std::sync::Mutex;
 
 pub mod common;
 pub mod config;
@@ -21,16 +22,28 @@ async fn manual_hello() -> impl Responder {
 
 #[post("/api/test")]
 async fn test() -> Result<&'static str, Box<dyn std::error::Error>> {
-    let mut sf = fetcher::stock::StockFetcher::new();
-    let s = sf.get_data("00700").await?;
-    println!("s: {:?}", s);
+    // let mut sf = fetcher::stock::StockFetcher::new();
+    // let s = sf.get_data("00700").await?;
+    // println!("s: {:?}", s);
     return Ok("");
+}
+
+pub struct AppState {
+    stock_fetcher: fetcher::stock::StockFetcher,
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
+    // 初始化stockFetcher
+    let stock_fetcher = fetcher::stock::StockFetcher::new().await;
+    let app_data = AppState {
+        stock_fetcher: stock_fetcher,
+    };
+    let data = web::Data::new(Mutex::new(app_data));
+
+    HttpServer::new(move || {
         App::new()
+            .app_data(data.clone())
             .service(hello)
             .service(echo)
             .service(test)
