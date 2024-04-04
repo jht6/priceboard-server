@@ -16,18 +16,54 @@ lazy_static! {
         let mut map = HashMap::new();
 
         map.insert(
-            "btc".to_string(),
+            "BTC".to_string(),
             Item {
-                id: "btc".to_string(),
-                name: "比特币".to_string(),
+                id: "BTC".to_string(),
+                name: "BTC".to_string(),
                 data_type: DATA_TYPE_COIN.to_string(),
             },
         );
 
+        // map.insert(
+        //     "ETH".to_string(),
+        //     Item {
+        //         id: "ETH".to_string(),
+        //         name: "ETH".to_string(),
+        //         data_type: DATA_TYPE_COIN.to_string(),
+        //     },
+        // );
+
+        // map.insert(
+        //     "BNB".to_string(),
+        //     Item {
+        //         id: "BNB".to_string(),
+        //         name: "BNB".to_string(),
+        //         data_type: DATA_TYPE_COIN.to_string(),
+        //     },
+        // );
+
+        // map.insert(
+        //     "DOGE".to_string(),
+        //     Item {
+        //         id: "DOGE".to_string(),
+        //         name: "DOGE".to_string(),
+        //         data_type: DATA_TYPE_COIN.to_string(),
+        //     },
+        // );
+
+        // map.insert(
+        //     "UNI".to_string(),
+        //     Item {
+        //         id: "UNI".to_string(),
+        //         name: "UNI".to_string(),
+        //         data_type: DATA_TYPE_COIN.to_string(),
+        //     },
+        // );
+
         map.insert(
             "tecent".to_string(),
             Item {
-                id: "tecent".to_string(),
+                id: "00700".to_string(),
                 name: "腾讯".to_string(),
                 data_type: DATA_TYPE_STOCK.to_string(),
             },
