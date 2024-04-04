@@ -24,41 +24,41 @@ lazy_static! {
             },
         );
 
-        // map.insert(
-        //     "ETH".to_string(),
-        //     Item {
-        //         id: "ETH".to_string(),
-        //         name: "ETH".to_string(),
-        //         data_type: DATA_TYPE_COIN.to_string(),
-        //     },
-        // );
+        map.insert(
+            "ETH".to_string(),
+            Item {
+                id: "ETH".to_string(),
+                name: "ETH".to_string(),
+                data_type: DATA_TYPE_COIN.to_string(),
+            },
+        );
 
-        // map.insert(
-        //     "BNB".to_string(),
-        //     Item {
-        //         id: "BNB".to_string(),
-        //         name: "BNB".to_string(),
-        //         data_type: DATA_TYPE_COIN.to_string(),
-        //     },
-        // );
+        map.insert(
+            "BNB".to_string(),
+            Item {
+                id: "BNB".to_string(),
+                name: "BNB".to_string(),
+                data_type: DATA_TYPE_COIN.to_string(),
+            },
+        );
 
-        // map.insert(
-        //     "DOGE".to_string(),
-        //     Item {
-        //         id: "DOGE".to_string(),
-        //         name: "DOGE".to_string(),
-        //         data_type: DATA_TYPE_COIN.to_string(),
-        //     },
-        // );
+        map.insert(
+            "DOGE".to_string(),
+            Item {
+                id: "DOGE".to_string(),
+                name: "DOGE".to_string(),
+                data_type: DATA_TYPE_COIN.to_string(),
+            },
+        );
 
-        // map.insert(
-        //     "UNI".to_string(),
-        //     Item {
-        //         id: "UNI".to_string(),
-        //         name: "UNI".to_string(),
-        //         data_type: DATA_TYPE_COIN.to_string(),
-        //     },
-        // );
+        map.insert(
+            "UNI".to_string(),
+            Item {
+                id: "UNI".to_string(),
+                name: "UNI".to_string(),
+                data_type: DATA_TYPE_COIN.to_string(),
+            },
+        );
 
         map.insert(
             "tecent".to_string(),

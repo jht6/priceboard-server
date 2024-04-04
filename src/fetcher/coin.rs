@@ -37,10 +37,7 @@ impl CoinFetcher {
         Self {}
     }
 
-    pub async fn get_data(
-        &mut self,
-        coin_name: &str,
-    ) -> Result<ResData, Box<dyn std::error::Error>> {
+    pub async fn get_data(&self, coin_name: &str) -> Result<ResData, Box<dyn std::error::Error>> {
         let req_json = ApiReqBody {
             contract: coin_name.to_string(), // BTC
             exchange: "Binance".to_string(), // Binance

@@ -70,10 +70,7 @@ impl StockFetcher {
     }
 
     // 参考 https://github.com/LeekHub/leek-fund/blob/master/src/explorer/stockService.ts#L382
-    pub async fn get_data(
-        &mut self,
-        stock_code: &str,
-    ) -> Result<Quote, Box<dyn std::error::Error>> {
+    pub async fn get_data(&self, stock_code: &str) -> Result<Quote, Box<dyn std::error::Error>> {
         let json_data = reqwest::Client::new()
             .get(STOCK_API.to_owned() + stock_code)
             .header("User-Agent", HEADER_USER_AGENT.to_string())

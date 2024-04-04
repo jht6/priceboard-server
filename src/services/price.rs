@@ -1,5 +1,4 @@
 use crate::common::obj::Res;
-use std::sync::Mutex;
 
 use actix_web::{post, web};
 use serde::{Deserialize, Serialize};
@@ -19,11 +18,10 @@ struct StockDto {
 
 #[post("/api/get_stock_data")]
 async fn get_stock_data(
-    data: web::Data<Mutex<crate::AppState>>,
+    data: web::Data<crate::AppState>,
     dto: web::Json<StockDto>,
 ) -> web::Json<Res<Option<Price>>> {
-    let mut app_data = data.lock().unwrap();
-    let ret = app_data.stock_fetcher.get_data(&dto.stock_code).await;
+    let ret = &data.stock_fetcher.get_data(&dto.stock_code).await;
     match ret {
         Ok(x) => web::Json(Res::<Option<Price>> {
             code: 0,
@@ -32,7 +30,7 @@ async fn get_stock_data(
                 current: x.current,
                 percent: x.percent,
                 change: x.chg,
-                currency: x.currency,
+                currency: x.currency.clone(),
             }),
         }),
         Err(err) => web::Json(Res::<Option<Price>> {
@@ -49,11 +47,10 @@ struct CoinDto {
 }
 #[post("/api/get_coin_data")]
 async fn get_coin_data(
-    data: web::Data<Mutex<crate::AppState>>,
+    data: web::Data<crate::AppState>,
     dto: web::Json<CoinDto>,
 ) -> web::Json<Res<Option<Price>>> {
-    let mut app_data = data.lock().unwrap();
-    let ret = app_data.coin_fetcher.get_data(&dto.coin_name).await;
+    let ret = &data.coin_fetcher.get_data(&dto.coin_name).await;
     match ret {
         Ok(x) => web::Json(Res::<Option<Price>> {
             code: 0,

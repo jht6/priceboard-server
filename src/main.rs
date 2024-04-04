@@ -1,5 +1,4 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
-use std::sync::Mutex;
 
 pub mod common;
 pub mod config;
@@ -39,15 +38,14 @@ async fn main() -> std::io::Result<()> {
     let stock_fetcher = fetcher::stock::StockFetcher::new().await;
     let coin_fetcher = fetcher::coin::CoinFetcher::new();
 
-    let app_data = AppState {
+    let app_data = web::Data::new(AppState {
         stock_fetcher,
         coin_fetcher,
-    };
-    let data = web::Data::new(Mutex::new(app_data));
+    });
 
     HttpServer::new(move || {
         App::new()
-            .app_data(data.clone())
+            .app_data(app_data.clone())
             .service(hello)
             .service(echo)
             .service(test)
