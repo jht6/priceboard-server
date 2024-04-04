@@ -1,7 +1,6 @@
 use crate::common::consts::data_type::{DATA_TYPE_COIN, DATA_TYPE_STOCK};
 use lazy_static::lazy_static;
 use serde::Serialize;
-use std::collections::HashMap;
 
 #[derive(Serialize)]
 pub struct Item {
