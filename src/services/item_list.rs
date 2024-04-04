@@ -1,13 +1,13 @@
 use crate::common::obj::Res;
-use crate::config::data_config::{Item, DATA_CONFIG};
+use crate::config::data_config::{Item, DATA_CONFIG_LIST};
 use actix_web::{post, web};
 // use serde::Serialize;
 
 #[post("/api/get_item_list")]
-async fn get_item_list<'a>() -> web::Json<Res<Vec<&'a Item>>> {
+async fn get_item_list() -> web::Json<Res<Vec<&'static Item>>> {
     let mut list = Vec::new();
 
-    for (_, item) in DATA_CONFIG.iter() {
+    for item in DATA_CONFIG_LIST.iter() {
         list.push(item)
     }
 
