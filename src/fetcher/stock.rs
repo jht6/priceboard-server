@@ -1,9 +1,9 @@
+use crate::common::consts::req::HEADER_USER_AGENT;
 use serde::{Deserialize, Serialize};
 use std::io;
 
 // const STOCK_API: &str = "https://stock.xueqiu.com/v5/stock/realtime/quotec.json?symbol=";
 const STOCK_API: &str = "https://stock.xueqiu.com/v5/stock/batch/quote.json?symbol=";
-const USER_AGENT: &str = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36";
 
 // ------------------------雪球API json结构----------------------------
 #[derive(Serialize, Deserialize, Debug)]
@@ -53,7 +53,7 @@ impl StockFetcher {
         // 获取cookie的token值
         let res = reqwest::Client::new()
             .get("https://xueqiu.com/")
-            .header("User-Agent", USER_AGENT)
+            .header("User-Agent", HEADER_USER_AGENT)
             .send()
             .await?;
 
@@ -76,7 +76,7 @@ impl StockFetcher {
     ) -> Result<Quote, Box<dyn std::error::Error>> {
         let json_data = reqwest::Client::new()
             .get(STOCK_API.to_owned() + stock_code)
-            .header("User-Agent", USER_AGENT.to_string())
+            .header("User-Agent", HEADER_USER_AGENT.to_string())
             .header("Connection", "Keep-Alive")
             .header("Accept", "text/html, application/xhtml+xml, */*")
             .header(

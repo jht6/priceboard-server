@@ -30,14 +30,18 @@ async fn test() -> Result<&'static str, Box<dyn std::error::Error>> {
 
 pub struct AppState {
     stock_fetcher: fetcher::stock::StockFetcher,
+    coin_fetcher: fetcher::coin::CoinFetcher,
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // 初始化stockFetcher
+    // 初始化fetcher
     let stock_fetcher = fetcher::stock::StockFetcher::new().await;
+    let coin_fetcher = fetcher::coin::CoinFetcher::new();
+
     let app_data = AppState {
-        stock_fetcher: stock_fetcher,
+        stock_fetcher,
+        coin_fetcher,
     };
     let data = web::Data::new(Mutex::new(app_data));
 
@@ -49,9 +53,10 @@ async fn main() -> std::io::Result<()> {
             .service(test)
             .service(services::item_list::get_item_list)
             .service(services::price::get_stock_data)
+            .service(services::price::get_coin_data)
             .route("/hey", web::get().to(manual_hello))
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("0.0.0.0", 8080))?
     .run()
     .await
 }

@@ -16,6 +16,7 @@ struct Price {
 struct StockDto {
     stock_code: String, // 股票代码
 }
+
 #[post("/api/get_stock_data")]
 async fn get_stock_data(
     data: web::Data<Mutex<crate::AppState>>,
@@ -32,6 +33,36 @@ async fn get_stock_data(
                 percent: x.percent,
                 change: x.chg,
                 currency: x.currency,
+            }),
+        }),
+        Err(err) => web::Json(Res::<Option<Price>> {
+            code: 1,
+            msg: err.to_string(),
+            data: None,
+        }),
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct CoinDto {
+    coin_name: String, // 币名
+}
+#[post("/api/get_coin_data")]
+async fn get_coin_data(
+    data: web::Data<Mutex<crate::AppState>>,
+    dto: web::Json<CoinDto>,
+) -> web::Json<Res<Option<Price>>> {
+    let mut app_data = data.lock().unwrap();
+    let ret = app_data.coin_fetcher.get_data(&dto.coin_name).await;
+    match ret {
+        Ok(x) => web::Json(Res::<Option<Price>> {
+            code: 0,
+            msg: "".to_string(),
+            data: Some(Price {
+                current: x.price,
+                percent: x.priceDayChange,
+                change: x.priceDayChangeAmount,
+                currency: "CNY".to_string(),
             }),
         }),
         Err(err) => web::Json(Res::<Option<Price>> {
