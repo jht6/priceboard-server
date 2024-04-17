@@ -1118,6 +1118,7 @@ dependencies = [
  "actix-web",
  "chrono",
  "lazy_static",
+ "regex",
  "reqwest",
  "serde",
  "tokio",
