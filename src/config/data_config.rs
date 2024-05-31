@@ -34,8 +34,8 @@ lazy_static! {
                 data_type: DATA_TYPE_COIN.to_string(),
             },
             Item {
-                id: "SHIB".to_string(),
-                name: "SHIB".to_string(),
+                id: "SOL".to_string(),
+                name: "SOL".to_string(),
                 data_type: DATA_TYPE_COIN.to_string(),
             },
             Item {
